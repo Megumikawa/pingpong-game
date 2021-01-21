@@ -17,7 +17,6 @@ let intervalID= 0
 
 let startBtn = document.querySelector('#start')
 
-//handle arrow key click events here
 document.addEventListener('keydown', (event) => {
      if (event.keyCode == 39 || event.key == "ArrowRight") {
         isRightArrow = true;
@@ -29,7 +28,6 @@ document.addEventListener('keydown', (event) => {
      }
 })
 
-//make sure you disable the flags when you release the keys
 document.addEventListener('keyup', (event) => {
     isRightArrow = false;
     isLeftArrow = false;
@@ -45,9 +43,8 @@ function drawCircle() {
 }
 
 function gameOver(){
-    // update this as per your requirement
     canvas.style.display = 'none'
-    //startBtn.style.display = 'block'
+    startBtn.style.display = 'block'
 }
 
 function ballCollision(){
@@ -60,7 +57,7 @@ function ballCollision(){
     
     //check for bottom
     if (circleY + circleRadius > canvas.height) {
-        // check if ball stays within paddle boundries
+        // something here 
         if (circleX > paddleX && circleX < paddleX + paddleWidth) {
             incrementY = -incrementY
             score++
@@ -91,18 +88,13 @@ function drawPaddle(){
 }
 
 function draw(){
-    // clear the canvas so that the new images don't overlap the previous ones
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-
     drawCircle()
     drawPaddle()
     ballCollision()
-
-    // show the score
     ctx.font = '24px Verdana'
     ctx.fillText('Score:' + score, 20, 20)
 
-    // to make sure paddle moves and stays within boundries
     if (isRightArrow && (paddleX + paddleWidth < canvas.width)) {
         paddleX += incrementPaddle
     }
@@ -110,8 +102,6 @@ function draw(){
         paddleX -= incrementPaddle
     }
 
-
-    // to make sure your circle is always moving
     circleX += incrementX
     circleY += incrementY
 }
@@ -127,7 +117,6 @@ function startGame(){
 window.addEventListener('load', () => {
     canvas.style.display = 'none'
 
-    // start click event listener
     startBtn.addEventListener('click', () => {
         startGame()
     })
